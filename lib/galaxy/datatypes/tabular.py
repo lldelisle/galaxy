@@ -1505,4 +1505,3 @@ class JuicerMediumTabix(Tabix):
 
     def set_meta(self, dataset, metadata_tmp_files_dir=None, **kwd):
         super().set_meta(dataset, metadata_tmp_files_dir=metadata_tmp_files_dir, build_index=True, **kwd)
-
