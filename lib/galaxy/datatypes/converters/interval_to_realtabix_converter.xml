@@ -1,0 +1,66 @@
+<tool id="CONVERTER_interval_to_realtabix_0" name="Convert Interval to realtabix" version="1.0.0" hidden="true" profile="22.05">
+    <!-- <description>__NOT_USED_CURRENTLY_FOR_CONVERTERS__</description> -->
+    <requirements>
+        <requirement type="package" version="0.15.4">pysam</requirement>
+    </requirements>
+    <command><![CDATA[
+        python '$__tool_directory__/bgzip.py'
+        #if $input1.ext in ['bed', 'gff', 'vcf']
+            -P $input1.ext
+        #else if $input1.ext in ['gtf', 'gff3']
+            -P gff
+        #else
+            -c ${input1.metadata.chromCol}
+            -s ${input1.metadata.startCol}
+            -e ${input1.metadata.endCol}
+        #end if
+        '$input1' '$output1'
+    ]]></command>
+    <inputs>
+        <!-- gff because gff and vcf are not a subclass of interval -->
+        <param format="gff,vcf,interval" name="input1" type="data" label="Choose Interval file"/>
+    </inputs>
+    <outputs>
+        <data format="realtabixwithindex" name="output1" metadata_source="input1" >
+<!--             I would like to set it when gtf or gff3 or gff
+            <actions>
+                <action type="metadata" name="chromCol" default="1"/>
+                <action type="metadata" name="startCol" default="4"/>
+                <action type="metadata" name="endCol" default="5"/>
+            </actions>
+            And this for vcf :
+            <actions>
+                <action type="metadata" name="endCol" default="2"/>
+            </actions>
+        -->
+        </data>
+    </outputs>
+    <tests>
+        <test>
+            <param name="input1" ftype="bed" value="droPer1.bed"/>
+            <output name="output1" ftype="realtabix" value="droPer1.bgzip"/>
+        </test>
+        <test>
+            <param name="input1" ftype="encodepeak" value="encode.broad.peak"/>
+            <output name="output1" ftype="realtabix">
+                <assert_contents>
+                    <has_size value="295" delta="10"/>
+                </assert_contents>
+            </output>
+        </test>
+        <test>
+            <param name="input1" ftype="gff" value="gff_filter_by_feature_count_out2.gff"/>
+            <output name="output1" ftype="realtabix" value="bgzip_filter_by_feature_count_out2.bgzip"/>
+        </test>
+        <test>
+            <param name="input1" ftype="interval" value="2.interval"/>
+            <output name="output1" ftype="realtabix" value="2.bgzip"/>
+        </test>
+        <test>
+            <param name="input1" ftype="vcf" value="vcf_to_maf_in.vcf"/>
+            <output name="output1" ftype="realtabix" value="bgzip_to_maf_in.bgzip"/>
+        </test>
+    </tests>
+    <help>
+    </help>
+</tool>

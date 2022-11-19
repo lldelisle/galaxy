@@ -61,6 +61,7 @@
     <datatype extension="bed" type="galaxy.datatypes.interval:Bed" display_in_upload="true" description="BED format provides a flexible way to define the data lines that are displayed in an annotation track. BED lines have three required columns and nine additional optional columns. The three required columns are chrom, chromStart and chromEnd." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#Bed">
       <converter file="bed_to_gff_converter.xml" target_datatype="gff"/>
       <converter file="interval_to_bgzip_converter.xml" target_datatype="bgzip"/>
+      <converter file="interval_to_realtabix_converter.xml" target_datatype="realtabix"/>
       <converter file="interval_to_tabix_converter.xml" target_datatype="tabix" depends_on="bgzip"/>
       <converter file="bed_gff_or_vcf_to_bigwig_converter.xml" target_datatype="bigwig"/>
       <converter file="bed_to_fli_converter.xml" target_datatype="fli"/>
@@ -99,6 +100,7 @@
     <datatype extension="cxb" type="galaxy.datatypes.binary:Binary" mimetype="application/octet-stream" subclass="true" display_in_upload="true" description="Cuffquant output format"/>
     <datatype extension="chrint" type="galaxy.datatypes.interval:ChromatinInteractions" display_in_upload="true">
       <converter file="interval_to_bgzip_converter.xml" target_datatype="bgzip"/>
+      <converter file="interval_to_realtabix_converter.xml" target_datatype="realtabix"/>
       <converter file="interval_to_tabix_converter.xml" target_datatype="tabix" depends_on="bgzip"/>
       <converter file="bed_gff_or_vcf_to_bigwig_converter.xml" target_datatype="bigwig"/>
     </datatype>
@@ -164,6 +166,7 @@
       <converter file="bed_gff_or_vcf_to_bigwig_converter.xml" target_datatype="bigwig"/>
       <converter file="gff_to_fli_converter.xml" target_datatype="fli"/>
       <converter file="interval_to_bgzip_converter.xml" target_datatype="bgzip"/>
+      <converter file="interval_to_realtabix_converter.xml" target_datatype="realtabix"/>
       <converter file="interval_to_tabix_converter.xml" target_datatype="tabix" depends_on="bgzip"/>
       <display file="ensembl/ensembl_gff.xml" inherit="true"/>
       <display file="igv/gff.xml" inherit="true"/>
@@ -198,6 +201,7 @@
       <converter file="interval_to_bed6_converter.xml" target_datatype="bed6"/>
       <converter file="interval_to_bed12_converter.xml" target_datatype="bed12"/>
       <converter file="interval_to_bgzip_converter.xml" target_datatype="bgzip"/>
+      <converter file="interval_to_realtabix_converter.xml" target_datatype="realtabix"/>
       <converter file="interval_to_tabix_converter.xml" target_datatype="tabix" depends_on="bgzip"/>
       <converter file="interval_to_bigwig_converter.xml" target_datatype="bigwig"/>
       <!-- <display file="ucsc/interval_as_bed.xml" inherit="true" /> -->
@@ -390,11 +394,13 @@
     <datatype extension="encodepeak" type="galaxy.datatypes.interval:ENCODEPeak" display_in_upload="true">
       <converter file="interval_to_tabix_converter.xml" target_datatype="tabix" depends_on="bgzip"/>
       <converter file="interval_to_bgzip_converter.xml" target_datatype="bgzip"/>
+      <converter file="interval_to_realtabix_converter.xml" target_datatype="realtabix"/>
       <converter file="bed_gff_or_vcf_to_bigwig_converter.xml" target_datatype="bigwig"/>
     </datatype>
     <datatype extension="pdf" type="galaxy.datatypes.images:Pdf" mimetype="application/pdf" display_in_upload="true"/>
     <datatype extension="pileup" type="galaxy.datatypes.tabular:Pileup" display_in_upload="true">
       <converter file="interval_to_bgzip_converter.xml" target_datatype="bgzip"/>
+      <converter file="interval_to_realtabix_converter.xml" target_datatype="realtabix"/>
       <converter file="interval_to_tabix_converter.xml" target_datatype="tabix" depends_on="bgzip"/>
     </datatype>
     <datatype extension="obo" type="galaxy.datatypes.text:Obo" mimetype="text/html" display_in_upload="true"/>
@@ -444,6 +450,7 @@
     <datatype extension="dzi" type="galaxy.datatypes.xml:Dzi" mimetype="application/xml" display_in_upload="true"/>
     <datatype extension="vcf" type="galaxy.datatypes.tabular:Vcf" display_in_upload="true">
       <converter file="interval_to_bgzip_converter.xml" target_datatype="bgzip"/>
+      <converter file="interval_to_realtabix_converter.xml" target_datatype="realtabix"/>
       <converter file="vcf_to_vcf_bgzip_converter.xml" target_datatype="vcf_bgzip"/>
       <converter file="interval_to_tabix_converter.xml" target_datatype="tabix" depends_on="bgzip"/>
       <converter file="bed_gff_or_vcf_to_bigwig_converter.xml" target_datatype="bigwig"/>
@@ -475,8 +482,10 @@
     <datatype extension="protobuf2" type="galaxy.datatypes.binary:Binary" subclass="true" description="Protocol Buffers (Protobuf) is data format for serializing structured data." display_in_upload="true"/>
     <datatype extension="protobuf3" type="galaxy.datatypes.binary:Binary" subclass="true" description="Protocol Buffers (Protobuf) is data format for serializing structured data." display_in_upload="true"/>
     <datatype extension="onnx" type="galaxy.datatypes.binary:Binary" subclass="true" description="ONNX (Open neural network exchange) is data format for storing and sharing machine learning and deep learning models." display_in_upload="true"/>
-    <datatype extension="tabix" type="galaxy.datatypes.tabular:Tabix" mimetype="application/octet-stream" display_in_upload="true"/>
-    <datatype extension="juicer.medium.tabix" type="galaxy.datatypes.tabular:JuicerMediumTabix" mimetype="application/octet-stream" display_in_upload="true"/>
+    <datatype extension="tabix" type="galaxy.datatypes.binary:Binary" subclass="true" />
+    <datatype extension="realtabix" type="galaxy.datatypes.tabular:RealTabix" mimetype="application/octet-stream" display_in_upload="true"/>
+    <datatype extension="realtabixwithindex" type="galaxy.datatypes.tabular:RealTabixWithIndex" mimetype="application/octet-stream" display_in_upload="true"/>
+    <datatype extension="juicer.medium.tabix" type="galaxy.datatypes.tabular:JuicerMediumTabix" mimetype="application/octet-stream"/>
     <datatype extension="bgzip" type="galaxy.datatypes.binary:Binary" subclass="true" display_in_upload="true"/>
     <datatype extension="vcf_bgzip" type="galaxy.datatypes.tabular:VcfGz" display_in_upload="true">
       <display file="igv/vcf.xml"/>
@@ -1199,6 +1208,6 @@
     <sniffer type="galaxy.datatypes.neo4j:Neo4jDBzip"/>
     <sniffer type="galaxy.datatypes.tabular:VcfGz"/>
     <sniffer type="galaxy.datatypes.binary:Bcf"/>
-    <sniffer type="galaxy.datatypes.tabular:Tabix"/>
+    <sniffer type="galaxy.datatypes.tabular:RealTabix"/>
   </sniffers>
 </datatypes>

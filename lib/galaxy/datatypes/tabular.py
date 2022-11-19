@@ -1781,10 +1781,10 @@ class CMAP(TabularData):
             dataset.metadata.delimiter = "\t"
 
 
-class Tabix(Tabular):
+class RealTabix(Tabular):
     """
     Class describing the bgzip format (http://samtools.github.io/hts-specs/SAMv1.pdf)
-    As tabix is just a bgzip with an index
+    As tabix is just a sorted bgzip with chromosome column, start and end column and an index
     """
 
     file_ext = "tabix"
@@ -1845,7 +1845,7 @@ class Tabix(Tabular):
                 dataset.metadata.tabix_index = index_file
 
 
-class JuicerMediumTabix(Tabix):
+class JuicerMediumTabix(RealTabix):
     """
     Class describing a tabix file built from a juicer medium format:
     https://github.com/aidenlab/juicer/wiki/Pre#medium-format
@@ -1863,6 +1863,15 @@ class JuicerMediumTabix(Tabix):
     MetadataElement(name="chromCol", default=3, desc="Chrom column", param=metadata.ColumnParameter)
     MetadataElement(name="startCol", default=4, desc="Start column", param=metadata.ColumnParameter)
     MetadataElement(name="endCol", default=4, desc="End column", param=metadata.ColumnParameter)
+
+    def set_meta(self, dataset, metadata_tmp_files_dir=None, **kwd):
+        super().set_meta(dataset, metadata_tmp_files_dir=metadata_tmp_files_dir, build_index=True, **kwd)
+
+
+class RealTabixWithIndex(RealTabix):
+    """
+    Like RealTabix but the index is built (used in interval_to_realtabix converter)
+    """
 
     def set_meta(self, dataset, metadata_tmp_files_dir=None, **kwd):
         super().set_meta(dataset, metadata_tmp_files_dir=metadata_tmp_files_dir, build_index=True, **kwd)
