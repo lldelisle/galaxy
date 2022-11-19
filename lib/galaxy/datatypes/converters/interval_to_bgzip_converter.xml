@@ -8,6 +8,8 @@
         python '$__tool_directory__/bgzip.py'
         #if $input1.ext in ['bed', 'gff', 'vcf']
             -P $input1.ext
+        #else if $input1.ext in ['gtf', 'gff3']
+            -P gff
         #else
             -c ${input1.metadata.chromCol}
             -s ${input1.metadata.startCol}
