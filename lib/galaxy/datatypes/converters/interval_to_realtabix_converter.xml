@@ -21,7 +21,7 @@
         <param format="gff,vcf,interval" name="input1" type="data" label="Choose Interval file"/>
     </inputs>
     <outputs>
-        <data format="realtabixwithindex" name="output1" metadata_source="input1" >
+        <data format="realtabix" name="output1" metadata_source="input1" >
 <!--             I would like to set it when gtf or gff3 or gff
             <actions>
                 <action type="metadata" name="chromCol" default="1"/>

@@ -1817,7 +1817,7 @@ class RealTabix(Tabular):
             return binascii.hexlify(last28) == b"1f8b08040000000000ff0600424302001b0003000000000000000000"
 
     # Ideally the tabix_index would be regenerated when the metadataElements are updated
-    def set_meta(self, dataset, metadata_tmp_files_dir=None, build_index=False, **kwd):
+    def set_meta(self, dataset, metadata_tmp_files_dir=None, build_index=True, **kwd):
         super().set_meta(dataset, **kwd)
         if build_index:
             # Try to create the index for the Tabix file.
@@ -1864,14 +1864,11 @@ class JuicerMediumTabix(RealTabix):
     MetadataElement(name="startCol", default=4, desc="Start column", param=metadata.ColumnParameter)
     MetadataElement(name="endCol", default=4, desc="End column", param=metadata.ColumnParameter)
 
-    def set_meta(self, dataset, metadata_tmp_files_dir=None, **kwd):
-        super().set_meta(dataset, metadata_tmp_files_dir=metadata_tmp_files_dir, build_index=True, **kwd)
 
-
-class RealTabixWithIndex(RealTabix):
+class RealTabixWithoutIndex(RealTabix):
     """
-    Like RealTabix but the index is built (used in interval_to_realtabix converter)
+    Like RealTabix but the index is not built (used for upload)
     """
 
     def set_meta(self, dataset, metadata_tmp_files_dir=None, **kwd):
-        super().set_meta(dataset, metadata_tmp_files_dir=metadata_tmp_files_dir, build_index=True, **kwd)
+        super().set_meta(dataset, metadata_tmp_files_dir=metadata_tmp_files_dir, build_index=False, **kwd)
