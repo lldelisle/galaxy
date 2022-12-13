@@ -4,17 +4,7 @@
         <requirement type="package" version="1.14">htslib</requirement>
     </requirements>
     <command><![CDATA[
-        ln -s '$input1' input.bgz &&
-        tabix 
-            -p vcf
-            input.bgz
-        &&
-        if [ ! -s input.bgz.tbi ]; then
-            >&2 echo "The converted tabix index file is empty, meaning the input data is invalid.";
-            exit 1;
-        fi
-        &&
-        mv input.bgz.tbi '$output1'
+        cp '$input1'.tabix_index '$output1'
     ]]></command>
     <inputs>
         <param format="vcf_bgzip" name="input1" type="data" label="Choose BGZIP'd VCF file"/>
