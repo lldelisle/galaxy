@@ -7,7 +7,8 @@
         cp '$input1.metadata.tabix_index' '$output1' &&
         ln -s '$input1' test.bgzip &&
         ln -s '$output1' test.bgzip.tbi &&
-        tabix -l test.bgzip
+        tabix -l test.bgzip &&
+        ls -alh *
     ]]></command>
     <inputs>
         <param format="vcf_bgzip" name="input1" type="data" label="Choose BGZIP'd VCF file"/>
