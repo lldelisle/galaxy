@@ -50,6 +50,9 @@
             <assert_command>
                 <has_text text="-p bed"/>
             </assert_command>
+            <assert_stdout>
+                <has_line line="super_1"/>
+            </assert_stdout>
         </test>
         <test>
             <param name="input1" ftype="encodepeak" value="encode.broad.peak"/>
@@ -61,6 +64,9 @@
             <assert_command>
                 <has_text text="-p" negate="true"/>
             </assert_command>
+            <assert_stdout>
+                <has_line line="chr1"/>
+            </assert_stdout>
         </test>
         <test>
             <param name="input1" ftype="gff" value="gff_filter_by_feature_count_out2.gff"/>
@@ -72,6 +78,9 @@
             <assert_command>
                 <has_text text="-p gff"/>
             </assert_command>
+            <assert_stdout>
+                <has_line line="ctgA"/>
+            </assert_stdout>
         </test>
         <test>
             <param name="input1" ftype="interval" value="2.interval"/>
@@ -83,6 +92,9 @@
             <assert_command>
                 <has_text text="-p" negate="true"/>
             </assert_command>
+            <assert_stdout>
+                <has_line line="chrX"/>
+            </assert_stdout>
         </test>
         <test>
             <param name="input1" ftype="vcf" value="vcf_to_maf_in.vcf"/>
@@ -94,6 +106,9 @@
             <assert_command>
                 <has_text text="-p vcf"/>
             </assert_command>
+            <assert_stdout>
+                <has_line line="20"/>
+            </assert_stdout>
         </test>
     </tests>
     <help>
