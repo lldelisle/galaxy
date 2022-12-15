@@ -25,7 +25,8 @@
             exit 1;
         fi 
         &&
-        mv input.bgz.tbi '$output1'
+        mv input.bgz.tbi '$output1' &&
+        tabix -l input.bgz
     ]]></command>
     <inputs>
         <!-- gff because gff and vcf are not a subclass of interval -->

@@ -4,7 +4,10 @@
         <requirement type="package" version="1.14">htslib</requirement>
     </requirements>
     <command><![CDATA[
-        cp '$input1.metadata.tabix_index' '$output1'
+        cp '$input1.metadata.tabix_index' '$output1' &&
+        ln -s '$input1' test.bgzip &&
+        ln -s '$output1' test.bgzip.tbi &&
+        tabix -l test.bgzip
     ]]></command>
     <inputs>
         <param format="vcf_bgzip" name="input1" type="data" label="Choose BGZIP'd VCF file"/>
